@@ -1,0 +1,65 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+class person{
+	string name;
+	char sex;
+	person *f,*m;
+public:
+	string getname(){
+		return name;
+	}
+	char getsex(){
+		return sex;
+	}
+	person* getf(){
+		person* f1=new person;
+		*f1=*f;
+		return f1;
+	}
+	person* getm(){
+		person* m1=new person;
+		*m1=*m;
+		return m1;
+	}
+	person* getf1(){
+		return f;
+	}
+	person* getm1(){
+		return m;
+	}
+	void showperson(){
+		cout<<name<<endl;
+	}
+}; 
+int p1(person a,person b){
+	int n=0;
+	if(a.getf()->getname()==b.getf()->getname()||a.getm()->getname()==b.getm()->getname())
+	n=1;
+	return n;
+}
+void gparent(person* a){
+	person* f=new person;
+	f=a->getf1();
+	person* pf=new person;
+	pf=f->getf1();
+	cout<<"祖父：";pf->showperson(); 
+	person* f1=new person;
+	f1=a->getf1();
+	person* pm=new person;
+	pm=f->getm1();
+	cout<<"祖母：";pf->showperson();
+	person* f3=new person;
+	f3=a->getm1();
+	person* pf3=new person;
+	pf3=f3->getf1();
+	cout<<"外祖父：";pf->showperson();
+	person* f4=new person;
+	f4=a->getm1();
+	person* pm4=new person;
+	pm4=f4->getm1();
+	cout<<"祖父：";pf->showperson();
+}
+int main (){
+	
+}
