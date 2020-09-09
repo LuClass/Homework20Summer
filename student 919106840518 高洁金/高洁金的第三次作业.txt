@@ -1,0 +1,110 @@
+using namespace std;
+#include <iostream>
+class Person{
+	private:
+		string name;
+		char sex;
+		int count=0;		
+	public:
+	Person *father,*mother;
+	Person(string name,char sex){
+		this->name=name;
+		this->sex=sex;
+		count++;
+	}
+	void number(){
+		count++;		
+	}
+	int getcount(){
+		return count;
+	}
+	string getname(){
+		return name;
+	}
+	char getsex(){
+		return sex;
+	}
+	print(){
+		cout<<name<<' '<<sex<<endl;		
+	}
+	printfather(){
+		cout<<"父亲: "<<father->name<<' '<<father->sex<<endl;
+	}
+	printmother(){
+		cout<<"母亲: "<<mother->name<<' '<<mother->sex<<endl;
+	}
+	printsibling(){
+		cout<<"兄弟姐妹："; 
+	}
+	printgrandfather1(){
+		cout<<"祖父："; 
+	}
+	printgrandfather2(){
+		cout<<"外祖父："; 
+	}
+	printgrandmother1(){
+		cout<<"祖母："; 
+	}
+	printgrandmother2(){
+		cout<<"外祖母："; 
+	}
+};
+void family(Person *p,Person b,Person c){	
+	p->father=&b;
+	p->mother=&c;
+}
+void famo(Person *p){
+	if (p->father!=NULL){
+		p->printfather();
+		p->number();
+	}
+	if (p->mother!=NULL){
+		p->printmother();
+		p->number();
+	}
+	if (p->father->father!=NULL){
+		p->printgrandfather1();
+		p->father->father->print();
+		p->number();
+	}
+	if (p->father->mother!=NULL){
+		p->printgrandmother1();
+		p->father->mother->print();
+		p->number();
+	}	
+	if (p->mother->father!=NULL){
+		p->printgrandfather2();
+		p->mother->father->print();
+		p->number();
+	}
+	if (p->mother->mother!=NULL){
+		p->printgrandmother2();
+		p->mother->mother->print();
+		p->number();
+	}
+}	
+void judge(Person *m,Person *n){
+	if (m->father->getname()==n->father->getname()||m->mother->getname()==n->mother->getname()){
+	    m->number();
+	    m->printsibling();
+	    n->print(); 
+	}	
+} 
+int main()
+{
+	Person a("高洁金",'m'),b("高飞",'m'),c("韩秀果",'f'),d("高洁清",'f'),e("高洁峰",'m');
+	Person f("成龙",'m'),g("成果",'f'),h("周星驰",'m'),i("陈钰琪",'f');
+	Person *pa=&a,*pb=&b,*pc=&c,*pd=&d,*pe=&e,*pf=&f,*pg=&d,*ph=&h,*pi=&i;	
+	pa->print();	
+	family(pa,b,c);
+	family(pd,b,c);
+	family(pe,b,c);
+	family(pb,f,g);
+	family(pc,h,i);	
+	pa->father=pb;
+	pa->mother=pc;
+	famo(pa);
+	judge(pa,pd);
+	judge(pa,pe);
+	cout<<"人数: "<<a.getcount();
+}
