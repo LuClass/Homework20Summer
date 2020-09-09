@@ -1,0 +1,280 @@
+/*
+17. 构造一个 Person 类，表示人，除了姓名、性别等属性
+之外，还要描述一个人的父亲和母亲。根据父 母属性就能
+计算：1、某个人的兄弟姐妹有哪些人；2、某个人的祖父母
+和外祖父母有哪些人，等等。提示， 利用指针成员来表示 
+Person 之间的关联。 
+*/
+#include<time.h>
+#include<iostream>
+#include<iomanip>
+#include<cstring>
+#include<ctime>
+
+using namespace std;
+ 
+
+
+class Person{
+	static int NO ;
+	string name, dadname, momname;		
+	char sex;			//m,f
+	Person* father = NULL;		
+	Person* mother = NULL;	
+	public:
+		void buildPerson(string s = "blank", char sex = 'm', string dad = "dad", string mom = "mom"){
+			dadname = dad;
+			momname = mom;
+			name = s;
+			this->sex = sex;
+			//NO++;
+		}
+		
+		/*~Person(){
+			NO--;
+		}
+		*/ 
+		
+		void setname(){
+			string s;
+			cin>>s;
+			name = s;
+		}
+		void setsex(){
+			char s;
+			cin>>s;
+			sex = s;
+		}
+		void setdad(){
+			string s;
+			cin>>s;
+			dadname = s;
+		}
+		void setmom(){
+			string s;
+			cin>>s;
+			momname = s;
+		}
+		
+		void setPerson(){
+			setname();
+			setsex();
+			setdad();
+			setmom();
+		}
+		
+		void pointpar(Person &p){
+			if(p.getname() == dadname){
+				father = &p;
+			}
+			if(p.getname() == momname){
+				mother = &p;
+			}
+		}
+		
+		
+		
+		
+			
+		string getname(){
+			return name;
+		}
+		
+		
+		
+		
+			
+		void showname(){
+			cout<<name;
+		}
+		void showfather(){
+			cout<<dadname;
+		}
+		void showmother(){
+			cout<<mother->getname()<<'	';
+		}
+
+	 
+		bool Isfam(Person p){
+			
+			if (p.dadname == this->dadname && p.momname == this->momname)
+			return true;
+			else
+			return false;
+		}
+		bool Issister(Person p){
+			if(Isfam(p) && p.sex == 'f')
+			return true;
+			else 
+			return false;
+		}
+		bool Isbro(Person p){
+			if(Isfam(p) && p.sex == 'm')
+			return true;
+			else 
+			return false;
+		} 
+		
+		void momparents(){
+			cout<<"外祖母为："<<mother->mother->getname()<<endl;
+			cout<<"外祖父为："<<mother->father->getname()<<endl;
+		}		
+		void dadparents(){
+			cout<<"祖母为："<<father->mother->getname()<<endl;
+			cout<<"祖父为："<<father->father->getname()<<endl;
+		}
+		void grandparents(){
+			bool have = false;
+			if(father!=NULL && father->mother!=NULL){
+				have = true;
+				cout<<"祖母为："<<father->mother->getname()<<endl;
+			}
+			if(father!=NULL && father->father!=NULL){
+				have = true;
+				cout<<"祖父为："<<father->father->getname()<<endl;
+			}
+			if(mother!=NULL && mother->mother!=NULL){
+				have = true;
+				cout<<"外祖母为："<<mother->mother->getname()<<endl;
+			}
+			if(mother!=NULL && mother->father!=NULL){
+				have = true;
+				cout<<"外祖父为："<<mother->father->getname()<<endl;
+			}
+			if (!have){
+				cout << "这群人中找不到此人的祖父母或外祖父母\n";
+			}
+		}
+		
+};
+
+int Person::NO;
+
+class connection{
+	Person* par;
+	Person* kid;
+	public:
+	string getparname(){
+		return par->getname();
+	}
+};
+
+int main()
+{
+	
+	
+	while (1)
+	{
+	int n;
+	cout << "输入此次操作包含的人数（输入0以结束程序）：";
+	cin >> n;
+	if(!n)
+	break ;
+	
+	//n=4;
+	Person* a = new Person[n];
+	cout<< "在下方依次输入每人的姓名，性别，父亲的名字，母亲的名字\n";
+	for (int i = 0; i< n; i++){
+		 a[i].setPerson();
+	}
+	/*a[0].buildPerson("666", 'm', "22", "33");
+	a[1].buildPerson("555", 'f', "22", "33");
+	a[2].buildPerson("22", 'm', "kk", "ll");
+	a[3].buildPerson("ll",'f',"11","22");
+	*/
+	
+
+	//为指向父母的指针赋值 
+	for (int i = 0; i<n; i++){
+		for(int j = 0; j<n; j++)
+		if (i!=j)
+		a[i].pointpar(a[j]);
+		
+		//a[i].showmother(); 
+		
+	}
+	/*for (int i = 0; i<n; i++){a[i].showfather();
+		cout<<'	'; 
+	}*/
+	
+	cout<< "以下是输入的所有人的名字\n";
+	for (int i = 0; i<n; i++){
+		a[i].showname();
+		cout<<'	';
+	}
+	cout<<endl;
+	
+	
+	{cout<<"选择要执行的操作\n";
+	cout<<"输入1以查找某人的兄弟姐妹\n";
+	cout<<"输入2以在输入的这群人中查找某个人的祖父母与外祖父母\n";
+	cout<<"输入3以重新输入人数与人物信息\n";
+	cout<<"输入0以结束程序\n" ;
+	}
+	
+	int c;
+	cin>>c;
+	
+	switch (c){
+		case 1:{//找出某人的兄弟姐妹
+			cout<< "输入的某人的名字以查找其兄弟姐妹\n";
+	string x;
+	cin>>x;
+	for (int i = 0; i<n; i++){
+		if(a[i].getname() == x){
+			bool have = false;
+			for (int j = 0; j<n; j++){
+				if(i!=j){
+					if(a[i].Issister(a[j])){
+						have = true;
+						cout<<a[j].getname()<<"是此人的姐妹\n";
+					}	
+					if(a[i].Isbro(a[j])){
+						have = true;
+						cout<<a[j].getname()<<"是此人的兄弟\n";
+					}
+				}
+			}
+			if(!have){
+				cout<<"这群人中找不到此人的兄弟姐妹\n";
+			}
+			break; 
+		}
+	} 
+			break;
+		}
+		case 2:{
+			cout<< "输入的某人的名字以查找其祖父母与外祖父母\n";
+			string x;
+	cin>>x;
+	 for (int i = 0; i<n; i++){
+		if(a[i].getname() == x){
+			a[i].grandparents();
+			break; 
+		}
+	} 
+			break;
+		}
+		case 3:{
+			continue;
+		}
+		case 0:{
+			n = 0;
+			break;
+		}
+	}
+	
+	
+	delete a;
+	if (!n)
+	return 0;
+	}
+	
+	
+	
+	
+	return 0;
+
+		
+
+ } 
