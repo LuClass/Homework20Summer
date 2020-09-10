@@ -65,7 +65,8 @@ public:
 
 };
 int main(){
-	MediaFile a(".avi", "中国抗击疫情保卫战", 3.2, 260);
+	MediaFile a(".avi", "中国抗击疫情保卫战", 3.2, 260),b;
 	a.show_ME();
+	b.show_ME();
 	return 0;
 }
