@@ -1,5 +1,5 @@
 //（课本P294.17）
-#include <iostream>//**************************程序特点：用随机数生成100个person类的具体对象并制定好他们的父母，输入数字序号可查询该人的兄弟姐妹和祖父母外祖父母
+#include <iostream>//用随机数生成100个person类的具体对象并制定好他们的父母，输入数字序号可查询该人的兄弟姐妹和祖父母外祖父母
 #include <cstring>
 #include <time.h>
 #include <cstdlib>
