@@ -1,0 +1,29 @@
+using namespace std;
+#include <iostream>
+#include <string.h>
+class cat{
+	private:
+		int age,weight;
+		char color[10];
+	public:
+		void setcat(int a,int b,char c[]);
+		void print(){
+			cout<<age<<"    "<<weight<<"    "<<color<<endl;
+		}
+};
+void cat::setcat(int a,int b,char c[]){
+	age=a;
+	weight=b;
+	strcpy(color,c);
+}
+int main()
+{
+	cat cat1,cat2;
+	cat1.setcat(1,10,"gray");
+	cat2.setcat(1,13,"white");
+	cout<<"    年龄  体重   颜色"<<endl; 
+	cout<<"cat1: ";
+	cat1.print();
+	cout<<"cat2: ";
+	cat2.print();
+}

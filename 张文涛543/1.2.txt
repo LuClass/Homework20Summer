@@ -1,0 +1,56 @@
+P293  14题
+
+
+#include <iostream>
+#include <time.h>
+using namespace std;
+class DateTime{
+	private:
+		int Date,year,month,day,hour,min,sec;
+	public:
+		DateTime()
+		{
+			time_t ltime=time(NULL);   
+			tm*today=localtime(&ltime); 
+   			year=today->tm_year+1900;    
+   			month=today->tm_mon+1;    
+   			day=today->tm_mday;
+   			hour=today->tm_hour;
+   			min=today->tm_min;
+   			sec=today->tm_sec;
+		}
+		DateTime(int year,int month,int day,int hour,int min,int sec)
+		{
+			this->year=year;
+			this->month=month;
+			this->day=day;
+			this->hour=hour;
+			this->min=min;
+			this->sec=sec;
+			getter();
+		}
+		int setter()
+		{
+			cin>>year>>month>>day>>hour>>min>>sec;
+		}
+		int getter()
+		{
+			cout<<year<<"."<<month<<"."<<day<<"  "<<hour<<":"<<min<<":"<<sec<<endl;
+		}
+		void show()
+		{
+			cout<<year<<"."<<month<<"."<<day<<"  "<<hour<<":"<<min<<":"<<sec<<endl;
+		}
+};
+int main()
+{
+	cout<<"当前时间：\n";
+	DateTime date1;
+	date1.show();
+	DateTime date2;
+	cout<<"输入：\n";
+	date2.setter();
+	cout<<"date2: "<<endl;
+	date2.getter();
+	return 0;
+} 

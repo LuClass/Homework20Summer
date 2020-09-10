@@ -1,0 +1,33 @@
+P252  8题
+
+#include <iostream>
+using namespace std;
+class Cat{
+	private:
+		float age;
+		float weight;
+		string color;
+	public:
+		char Set(float a,float w,string c);
+		void print()
+		{
+			cout<<"age:"<<age<<" wieght:"<<weight<<"kg color:"<<color<<endl;
+		}
+};
+	char Cat::Set(float a,float w,string c)
+	{
+		age=a;
+		weight=w;
+		color=c;
+	} 
+int main()
+{
+	Cat cat1,cat2;
+	cat1.Set(1,3.5,"black");
+	cat2.Set(2,8,"white");
+	cout<<"cat1: "<<endl;
+	cat1.print();
+	cout<<"cat2: "<<endl;
+	cat2.print();
+	return 0;
+} 

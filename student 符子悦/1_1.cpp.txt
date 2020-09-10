@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+class cat{
+	private:
+		int age;
+		float weight;
+		char color[10];
+	public:
+		s1(int a,float b,char c[10]){
+			age=a;weight=b;strcpy(color,c);
+		}
+		s2(){
+			cout<<"age:"<<age<<endl;
+			cout<<"weight:"<<weight<<endl;
+			cout<<"color:"<<color<<endl;
+		}
+}; 
+int main (){
+	int a1;
+	float b1;
+	char c1[10];
+	cin>>a1>>b1>>c1;
+	cat cat1;
+	cat1.s1(a1,b1,c1);
+	cat1.s2();
+	return 0;
+}
