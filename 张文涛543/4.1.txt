@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+class File{
+	string name;
+	float kb;
+	int Creationyear,Creationmonth,Creationday;
+	int Modificationyear,Modificationmonth,Modificationday;	
+	public:
+	File(string name,float kb,int Creationyear,int Creationmonth,int Creationday,int Modificationyear,int Modificationmonth,int Modificationday) 
+    {
+    	this->name=name;
+    	this->kb=kb;
+    	this->Creationyear=Creationyear;
+    	this->Creationmonth=Creationmonth;
+    	this->Creationday=Creationday;
+    	this->Modificationyear=Modificationyear;
+    	this->Modificationmonth=Modificationmonth;
+    	this->Modificationday=Modificationday;
+	}
+	void show1()
+	{
+		cout<<"名称:"<<name<<endl;
+		cout<<"创建时间:"<<Creationyear<<"."<<Creationmonth<<"."<<Creationday<<endl;
+		cout<<"修改时间:"<<Modificationyear<<"."<<Modificationmonth<<"."<<Modificationday<<endl;
+		cout<<"大小:"<<kb<<"kb"<<endl;
+		
+	}
+};
+class MediaFile:public File{
+	string category;
+	int playyear,playmonth,playday;
+	public:
+		MediaFile(string category,int playyear,int playmonth,int playday,string name,float kb,int Creationyear,int Creationmonth,int Creationday,int Modificationyear,int Modificationmonth,int Modificationday)
+		:File(name, kb, Creationyear, Creationmonth, Creationday, Modificationyear, Modificationmonth, Modificationday)
+	{
+		this->category=category;
+		this->playyear=playyear;
+		this->playmonth=playmonth;
+		this->playday=playday;
+
+	}
+	void show2()
+	{
+		cout<<"类别:"<<category<<endl;
+		cout<<"播放时间:"<<playyear<<"."<<playmonth<<"."<<playday<<endl;	
+	}
+};
+int main()
+{
+	MediaFile file1("mp4",2020,9,11,"南理工校史",1048,2008,1,1,2020,9,11);
+	file1.show1();
+	file1.show2();
+} 
