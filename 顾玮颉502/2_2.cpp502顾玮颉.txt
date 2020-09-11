@@ -1,0 +1,135 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class File
+{
+	string name;
+	string size;
+	string date;
+	string change;
+public:
+	File()
+	{
+		name;
+		size;
+		date;
+		change;
+	}
+	string get_name();
+	void set_name(string str);
+	string get_size();
+	void set_size(string d);
+	string get_date();
+	void set_date(string str);
+	string get_change();
+	void set_change(string str);
+};
+
+void File::set_name(string str)
+{
+	name = str;
+}
+string File::get_name()
+{
+	return name;
+}
+
+
+void File::set_size(string d)
+{
+	size = d;
+}
+string File::get_size()
+{
+	return size;
+}
+
+void File::set_date(string str)
+{
+	date = str;
+}
+string File::get_date()
+{
+	return date;
+}
+
+void File::set_change(string str)
+{
+	change = str;
+}
+
+string File::get_change()
+{
+	return change;
+}
+
+class MediaFile :public File
+{
+	string type;
+	string time;
+public:
+	MediaFile()
+	{
+		type;
+		time;
+	}
+	string get_type()
+	{
+		return type;
+	}
+	void set_type(string str)
+	{
+		type = str;
+	}
+	string get_time()
+	{
+		return time;
+	}
+	void set_time(string str)
+	{
+		time = str;
+	}
+};
+
+void show(MediaFile a)
+{
+	cout << "文件名：" << a.get_name() << endl;
+	cout << "媒体类别：" << a.get_type() << endl;
+	cout << "大小：" << a.get_size() << endl;
+	cout << "创建日期：" << a.get_date() << endl;
+	cout << "修改日期：" << a.get_change() << endl;
+	cout << "播放时间：" << a.get_time() << endl;
+}
+
+int main()
+{
+	int n;
+	while ( cin >> n && n!=0)
+	{
+		MediaFile mdfile[n];
+		for (int i = 0; i < n; i++)
+		{
+			string name, type, size, date, change, time;
+			cin >> name >> type >> size >> date >> change >> time;
+			mdfile[i].set_name(name);
+			mdfile[i].set_type(type);
+			mdfile[i].set_size(size);
+			mdfile[i].set_date(date);
+			mdfile[i].set_change(change);
+			mdfile[i].set_time(time);
+		}
+		string str;
+		while ( cin >> str)
+		{
+			for (int i = 0; i < n; i++)
+			{
+				if (str == mdfile[i].get_name())
+				{
+					show(mdfile[i]);
+					break;
+				}
+			}
+		}
+	}
+	return 0;
+}
