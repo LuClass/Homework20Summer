@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+class File{
+	string name;
+	double size;
+	int credate,moddate;
+public:
+	string getn(){
+		return name;
+	}
+	double gets(){
+		return size;
+	}
+	int getcd(){
+		return credate;
+	}
+	int getm(){
+		return moddate;
+	}
+    File(string a,double b,int c,int d){
+		name=a;
+		size=b;
+		credate=c;
+		moddate=d;
+	}
+	File(){
+		
+	}
+};
+class MediaFile:public File{
+	string genre; 
+	int ptime;
+public:
+	string getg(){
+		return genre;
+	}
+	int getp(){
+		return ptime;
+    }
+	MediaFile(string a,double b,int c,int d,string e,int f):File(a,b,c,d){
+	genre=e;
+	ptime=f;	
+    }
+    MediaFile(){
+	}
+};
+int main(){
+	MediaFile a;
+}
