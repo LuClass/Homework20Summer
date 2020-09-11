@@ -1,0 +1,127 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+class Person
+{
+private:
+	string name;
+	string sex;
+	string father;
+	string mother;
+	Person* hfather;
+	Person* hmother;
+public:
+	string getname();
+	void setname(string str);
+	string getsex();
+	void setsex(string str);
+	string getfather();
+	void setfather(string str);
+	string getmother();
+	void setmother(string str);
+	Person* get_father();
+	void set_father(Person* p);
+	Person* get_mother();
+	void set_mother(Person* p);
+};
+
+
+void Person::setname(string str)
+{
+	name = str;
+}
+string Person::getname()
+{
+	return name;
+}
+void Person::setsex(string str)
+{
+	sex = str;
+}
+string Person::getsex()
+{
+	return sex;
+}
+void Person::setfather(string str)
+{
+	father=str;
+}
+string Person::getfather()
+{
+	return father;
+}
+string Person::getmother()
+{
+	return mother;
+}
+void Person::setmother(string str)
+{
+	mother=str;
+}
+
+Person* Person::get_father()
+{
+	return hfather;
+}
+
+void Person::set_father(Person* p)
+{
+	hfather = p;
+}
+
+Person* Person::get_mother()
+{
+	return hmother;
+}
+
+void Person::set_mother(Person* p)
+{
+	hmother = p;
+}
+
+void find1(string name,Person p1)
+{
+    Person* f1 = p1.get_father();
+    Person* f2 = p1.get_father();
+    string str1 = f1->getname();
+    string str2 = f2->getname();
+    if (str1 == str2)
+{
+      cout << name << "的兄弟姐妹有";;
+       cout << "  " << p1.getname();
+	}
+}
+
+void find2(Person p)
+{
+    Person* p1 = p.get_father();
+    Person* p2 = p1->get_father();
+    cout << "祖父是" << p2->getname()<<endl;
+    p2 = p1->get_mother();
+    cout << "祖母是" << p2->getname()<<endl;
+    p1 = p.get_mother();
+    cout << "外祖父是" << p2->getname()<<endl;
+    p2 = p1->get_mother();
+    cout << "外祖母是" << p2->getname()<<endl;
+}
+
+int main()
+{
+	int num;
+	string name, sex, father, mother;
+	Person person;
+	cin >> name >> sex >> father>> mother;
+	person.setname(name);
+	person.setsex(sex);
+	person.setfather(father);
+	person.setmother(mother);
+    if (person.getname() == father)
+	person.set_father(&person);
+	else if (person.getname() == mother)
+	person.set_mother(&person);
+	cout << "输入名字" << endl;
+	cin >> name;
+	find1(name, person);
+	find2(person);
+return 0;
+}
