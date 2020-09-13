@@ -1,0 +1,37 @@
+using namespace std;
+#include<iostream>
+#include<string>
+class file{
+    string m_name;
+    int m_size;
+    string m_created_time;
+    string m_modified_time;
+
+    public:
+    string name()   {return this->m_name;}
+    int size()  {return this->m_size;}
+    string created_time()    {return this->m_created_time;}
+    string modified_time()  {return this->m_modified_time;}
+    file () {}
+    file(string name, int size, string created_time, string modified_time)
+    {
+        this->m_name = name;
+        this->m_size =size;
+        this->m_created_time = created_time;
+        this->m_modified_time = modified_time;
+    }
+    
+};
+
+
+class MediaFile: public file
+{
+    string type;
+    string name;
+    int length;
+
+    public:
+    MediaFile()    {}
+
+
+};
