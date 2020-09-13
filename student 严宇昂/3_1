@@ -1,0 +1,66 @@
+using namespace std;
+#include<iostream>
+#include<string>
+class person{
+    int age;
+    char sex;
+    string name;
+    person* father;
+    person* mother;
+
+    public:
+
+    int getage()    {return this->age;}
+    string getname()    {return this->name;}
+    char getsex()   {return this->sex;}
+    person* getfather() {return this->father;}
+    person* getmother() {return this->mother;}
+
+
+    person(int age = 0 , char sex ='m', string name = "", person * father = nullptr, person * mother = nullptr)
+    {
+        this->age = age;
+        this->sex = sex;
+        this->name = name;
+        father = father;
+        mother = mother;
+    }
+
+    bool is_sis_or_bro(person &p)
+    {
+        if(this->father == p.getfather() 
+        && this->mother == p.getmother())
+
+        return true;
+    }
+
+    bool is_wai_grandpa(person &p)
+    {
+        if(this->getmother()->getfather() == &p)
+            return true;
+        return false;
+    }
+
+    bool is_wai_grandpa(person &p)
+    {
+        if(this->getfather()->getfather() == &p)
+            return true;
+
+        return false;
+    }
+
+    bool is_grandma(person &p)
+    {
+        if(this->getfather()->getmother() == &p)
+            return true;
+        return false;
+    }
+
+    bool is_wai_grandma(person &p)
+    {
+        if(this->getmother()->getmother() == &p)
+            return true;
+        return false;
+    }
+
+};
