@@ -1,0 +1,89 @@
+#include <iostream>
+using namespace std;
+class Fraction{
+	int n,d;
+public:
+	Fraction  reduction(){
+		if(d<=0)
+		return *this;
+		int b;
+		if(n>=d)b=n-1;
+		else b=d-1;
+		for(b;b>1;b--){
+			if(d%b==0&&n%b==0){
+				d/=b;n/=b;
+			}		
+		}
+		return *this;
+	}
+	
+	void show(){
+		cout<<n<<endl<<d;
+	}
+	
+	Fraction(int a,int b){
+		n=a;d=b;
+	}
+	
+	bool operator < (Fraction a){
+		bool l;
+		if((n*a.d)<(d*a.n))
+		l=true;
+		else
+		l=false;
+		return l;
+	}
+	bool operator <= (Fraction a){
+		bool l;
+		if((n*a.d)<=(d*a.n))
+		l=true;
+		else
+		l=false;
+		return l;
+	}
+	bool operator > (Fraction a){
+		bool l;
+		if((n*a.d)>(d*a.n))
+		l=true;
+		else
+		l=false;
+		return l;
+	}
+	bool operator >= (Fraction a){
+		bool l;
+		if((n*a.d)>=(d*a.n))
+		l=true;
+		else
+		l=false;
+		return l;
+	}
+	bool operator == (Fraction a){
+		bool l;
+		if((n*a.d)==(d*a.n))
+		l=true;
+		else
+		l=false;
+		return l;
+	}bool operator != (Fraction a){
+		bool l;
+		if((n*a.d)!=(d*a.n))
+		l=true;
+		else
+		l=false;
+		return l;
+	}
+	operator double(){
+		double k=(double)n/d;
+		return k;
+	}
+};
+
+int main(){
+	Fraction a(3,6);
+	a.reduction();
+	a.show();
+	Fraction b(2,5);
+	double v=(double)a;
+	cout<<endl<<v;
+	
+}
