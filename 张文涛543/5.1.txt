@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+class Fraction{
+	int fenzi;
+	int fenmu;
+	public:
+		Fraction(int fenzi=0,int fenmu=0)
+		{
+			this->fenzi=fenzi;
+			this->fenmu=fenmu;
+		}
+		int getGCD(int m, int n) {
+			m=m>0?m:-m;
+			n=n>0?n:-n;
+        for(int x=m;x>=1;x--){
+            if(m%x==0&&n%x==0){
+                return x;
+				}
+        	}
+    	}
+		void show()
+		{
+			int gcd =getGCD(fenzi,fenmu);
+			fenzi/=gcd;
+			fenmu/=gcd;
+			cout<<fenzi<<"/"<<fenmu<<endl;
+		}
+		Fraction operator+(const Fraction &a){	
+		return Fraction((fenzi*a.fenmu+fenmu*a.fenzi),fenmu*a.fenmu);
+		}
+		Fraction operator-(const Fraction &a){
+		return Fraction((fenzi*a.fenmu-fenmu*a.fenzi),fenmu*a.fenmu);
+		}
+		Fraction operator*(const Fraction &a){
+		return Fraction(fenzi*a.fenzi,fenmu*a.fenmu);
+		}
+		Fraction operator/(const Fraction &a){
+		return Fraction(fenzi*a.fenmu,fenmu*a.fenzi);
+		} 
+		operator double()
+		{
+			return (double)fenzi/fenmu;
+		}
+};
+
+int main()
+{
+	Fraction a1(1,3),a2(11,6);
+	Fraction a;
+	a=a1+a2; a.show();
+	a=a1-a2; a.show();
+	a=a1*a2; a.show();
+	a=a1/a2; a.show();
+	cout<<double(a1)<<endl;
+	cout<<double(a2)<<endl; 
+	return 0;
+}
