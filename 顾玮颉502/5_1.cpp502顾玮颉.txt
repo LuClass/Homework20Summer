@@ -1,0 +1,139 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+class CALCULATE
+{
+	int fenzi, fenmu;
+public:
+	CALCULATE() { fenzi = 1, fenmu = 1; }
+	CALCULATE(int fenzi, int fenmu);
+	void print();
+	CALCULATE operator+(const CALCULATE& b);
+	CALCULATE operator-(const CALCULATE& b);
+	CALCULATE operator*(const CALCULATE& b);
+	CALCULATE operator/(const CALCULATE& b);
+	operator double();
+};
+CALCULATE::CALCULATE(int fenzi, int fenmu)
+{
+	int t;
+	if(fenzi>fenmu)
+	{
+		t=fenmu;
+	 } 
+	 else
+	 t=fenzi;
+	while(fenzi%t!=0||fenmu%t!= 0)
+		t--;
+	fenzi/=t;
+	fenmu/=t;
+	this->fenzi=fenzi;
+	this->fenmu=fenmu;
+}
+
+void CALCULATE::print()
+{
+	if (fenzi == 0)
+		cout << 0 << endl;
+	if (fenzi == fenmu)
+		cout << 1 << endl;
+		cout <<fenzi<<endl;
+		cout <<"---"<<endl;
+		cout <<fenmu<<endl;
+}
+CALCULATE CALCULATE::operator+(const CALCULATE& b)
+{
+	int t;
+	if(fenmu>b.fenmu)
+	t=b.fenmu;
+	else
+	t=fenmu;
+	while(fenmu%t!=0||b.fenmu%t!= 0)
+		t--;
+	int q=fenmu*b.fenmu/t;
+	int t1=q/fenmu,t2=q/b.fenmu;
+	int mm=fenzi*t1,nn=b.fenzi*t2;
+	int ss=mm+nn;
+	return CALCULATE(ss,q);
+}
+CALCULATE CALCULATE::operator-(const CALCULATE& b)
+{
+	int t;
+	if(fenmu>b.fenmu)
+	t=b.fenmu;
+	else
+	t=fenmu;
+	while (fenmu %t!= 0 || b.fenmu %t!= 0)
+		t--;
+	int q= fenmu * b.fenmu /t;
+	int t1 =q/ fenmu,t2 =q/ b.fenmu;
+	int mm=fenzi*t1,nn=b.fenzi*t2;
+	int ss=mm-nn;
+	return CALCULATE(ss,q);
+}
+
+CALCULATE CALCULATE::operator*(const CALCULATE& b)
+{
+	return CALCULATE(fenzi *b.fenzi, fenmu *b.fenmu);
+}
+CALCULATE CALCULATE::operator/(const CALCULATE& b)
+{
+	int fenzi2 = b.fenmu, fenmu2 = b.fenzi;
+	return CALCULATE(fenzi * fenzi2, fenmu * fenmu2);
+}
+
+CALCULATE::operator double()
+{
+	double ret= 0.0;
+	double fz = double(fenzi);
+	double fm = double(fenmu);
+	ret= fz / fm;
+	return ret;
+}
+
+int main()
+{
+	int fenmu1, fenzi1,fenmu2, fenzi2;
+	while (cin>>fenzi1&& fenzi1 != 0)
+	{
+		cin >> fenmu1>>fenzi2>>fenmu2;
+		double ret= 0.0;
+		CALCULATE cal1(fenzi1, fenmu1);
+		CALCULATE cal2(fenzi2, fenmu2);
+		CALCULATE ret_cal;
+		string str;
+		while(cin>>str)
+		{
+			if (str=="+")
+			{
+				ret_cal=cal1 +cal2;
+					ret_cal.print();
+					ret= ret_cal;
+					cout<<ret<<endl;
+			}
+			if (str== "-")
+			{
+				ret_cal=cal1-cal2;
+					ret_cal.print();
+					ret= ret_cal;
+					cout<<ret<< endl;
+			}
+			if (str== "*")
+			{
+				ret_cal=cal1*cal2;
+					ret_cal.print();
+					ret= ret_cal;
+					cout<<ret<<endl;
+			}
+			if (str=="/")
+			{
+				ret_cal= cal1/cal2;
+					ret_cal.print();
+					ret= ret_cal;
+					cout<<ret<< endl;
+			}
+		}
+	}
+	return 0;
+}
