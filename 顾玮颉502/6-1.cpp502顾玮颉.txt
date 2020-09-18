@@ -1,0 +1,34 @@
+#include <iostream>
+#include <fstream>
+#include <cstring>
+using namespace std;
+int main(int argc, char* argv[])
+{
+	char filename1[100],filename2[100];
+	filename1[100]=*argv[1];
+	filename2[100]=*argv[2];
+	fstream infile,outfile;
+	infile.open(filename1,ios::in);
+	outfile.open(filename2);
+	if(!infile)
+	{
+		cout << "不能打开输入文件"<<endl;
+		return 0;
+	}
+	if (!outfile)
+	{
+		cout<<"不能打开目的文件"<<endl;
+		return 0;
+	}
+	char buff[4096];
+	int n;
+	while (infile.eof()==0)
+	{
+		infile.read(buff, 4096);
+		n = infile.gcount();
+		outfile.write(buff, n);
+	}
+	infile.close();
+	outfile.close();
+	return 0;
+}
