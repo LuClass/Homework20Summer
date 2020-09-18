@@ -1,0 +1,24 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+class Cat{
+	int age;
+	char color[10];
+	float weight;
+public:
+	void setpoint(int a,char b[],float c){
+		age=a;
+		strcpy(color,b);
+		weight=c;
+	}
+	void getpoint(){
+		cout<<"age:"<<age<<endl;
+		cout<<"color:"<<color<<endl;
+		cout<<"weight:"<<weight<<endl;
+	}
+}; 
+int main(){
+	Cat miao;
+	miao.setpoint(2,"green",23.5);
+	miao.getpoint();
+}

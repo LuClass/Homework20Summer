@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string.h>
+#include <String>
+using namespace std;
+class Person{
+	string name;
+	int sex;               //1为男性，2为女性。 
+	Person *mother;
+	Person *father;
+public:
+	void set(string n,int i){
+		name=n;
+		sex=i;
+	}
+	string Name(){
+		return name;
+	}
+	int getsex(){
+		return sex;
+	}
+	void setdad(Person *dad){
+		father=dad;
+	}
+	void setmom(Person *mom){
+		mother=mom;
+	}
+	Person *getdad(){
+		return father;
+	}
+	Person *getmom(){
+		return mother;
+	}
+	void relative(Person *p){
+		if((father->Name()==p->getdad()->Name())||(mother->Name()==p->getmom()->Name())){
+			if(p->getsex()==1){
+				cout<<name<<"的兄弟为："<<p->Name(); 
+			} 
+			else if(p->getsex()==2){
+				cout<<name<<"的姐妹为："<<p->Name(); 
+			}
+			else
+			    cout<<"no";
+		}
+	}
+	void grandrelative(){
+		cout<<name<<"祖父："<<father->getdad()->Name();
+		cout<<name<<"祖母："<<father->getmom()->Name();
+		cout<<name<<"外祖父："<<mother->getdad()->Name();
+		cout<<name<<"外祖母："<<mother->getmom()->Name();
+	}
+	
+};
+int main(){
+	Person *a,*b,*c,*d;
+	a->set("wang",1);
+	b->set("daff",2);
+	c->set("dwqd",1);
+	d->set("qwdq",2);
+	a->setdad(c);
+	a->setmom(d);
+	b->setdad(c);
+	b->setmom(d);
+	a->relative(b);
+}
