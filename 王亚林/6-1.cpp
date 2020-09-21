@@ -3,7 +3,7 @@
 using namespace std;
 int main(int argc, char *argv[]){
 	if(argc<=2)
-	 {cout<<"²ÎÊý²»¹»"<<endl;
+	 {cout<<"å‚æ•°ä¸å¤Ÿ"<<endl;
 	 return 0;	 }
 	fstream infile,outfile;
 	infile.open(argv[1],ios::in|ios::binary);
@@ -12,12 +12,12 @@ int main(int argc, char *argv[]){
 	outfile.open(argv[2],ios::out|ios::binary);
 	if(!infile)
 	{
-		cout<<"²»ÄÜ´ò¿ªÊäÈëÎÄ¼þ£º"<<argv[1]<<'\n';
+		cout<<"ä¸èƒ½æ‰“å¼€è¾“å…¥æ–‡ä»¶ï¼š"<<argv[1]<<'\n';
 		return 0;
 	}
 	if(!outfile)
 	{
-		cout<<"²»ÄÜ´ò¿ªÄ¿µÄÎÄ¼þ£º"<<argv[2]<<'\n';
+		cout<<"ä¸èƒ½æ‰“å¼€ç›®çš„æ–‡ä»¶ï¼š"<<argv[2]<<'\n';
 		 return 0;
 	}
 	char buff[4096];
