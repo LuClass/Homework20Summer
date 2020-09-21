@@ -1,0 +1,30 @@
+using namespace std;
+#include <iostream>
+#include <fstream>
+int main(int argc,char *argv[])
+{
+	fstream infile,outfile;
+	cout<<"输入源文件名：";
+	cin>>argv[1];
+	cout<<"输入目的文件名：";
+	cin>>argv[2];
+	infile.open(argv[1],ios::in|ios::binary);
+	infile.open(argv[2],ios::out|ios::binary);
+	if (!infile){
+		cout<<"不能打开输入文件："<<argv[1]<<endl;
+		return 0;
+	}
+	if (!outfile){
+		cout<<"不能打开目的文件："<<argv[2]<<endl;
+		return 0;
+	}
+	char buff[4096];
+	int n;
+	while (!infile.eof()){
+		infile.read(buff,4096);
+		n=infile.gcount();
+		outfile.write(buff,n);
+	}
+	infile.close();
+	outfile.close();
+}
