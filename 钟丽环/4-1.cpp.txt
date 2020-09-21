@@ -1,0 +1,46 @@
+#include<iostream>
+#include<String>
+using namespace std;
+class File{
+	string name;
+	double size;
+	string buildday;
+	string changeday;
+public:
+	void setfile(string n,double s,string b,string c){
+		name=n;
+		size=s;
+		buildday=b;
+		changeday=c;
+	}
+	void get(){
+		cout<<name<<":"<<endl;
+		cout<<size<<endl;
+		cout<<buildday<<endl;
+		cout<<changeday<<endl; 
+	}
+}; 
+class MediaFile:public File{
+	string time;
+	string format;
+public:
+	void set(string t,string f){
+		time=t;
+		format=f;
+	}
+	void out(){
+		cout<<time<<endl;
+		cout<<format<<endl;
+	}
+};
+int main(){
+	File f1;
+	f1.setfile("wangwang",1.25,"2000-12-30","2020-12-30");
+	MediaFile m1;
+	m1.setfile("wangwang",1.25,"2000-12-30","2020-12-30");
+	m1.set("15:00",".avi");
+	f1.get();
+	cout<<endl;
+	m1.get();
+	m1.out();
+}
