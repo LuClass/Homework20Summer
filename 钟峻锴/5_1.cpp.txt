@@ -1,0 +1,123 @@
+/*
+．建立一个分数类 Fraction，一个分数作为一个对象，如 1/2，2/3 等。分子分母都是 int 型
+a) 建立构造函数，要求分母大于 0，而且能对分子分母约分化简。 
+b) 重载定义四则运算：加法、减法、乘法、除法。
+d) 重载定义类型转换函数到 double 类型。   
+*/
+#include<time.h>
+#include<iostream>
+#include<iomanip>
+#include<cstring>
+#include<ctime>
+
+using namespace std;
+
+class Fraction{
+	int z,m;
+	public:
+		void yuefen(){
+			int n,fz ,fm;
+			fz = z>0?z:-z;
+			fm = m>0?m:-m;
+				n = fz>fm?fm:fz	;			
+				for (int i = n; i>0; i--)
+				{					
+					if( ( z % i ) || ( m % i ) )
+					continue;
+					else
+					{	
+						z = z / i;						 
+						m = m / i;
+						break;
+					}
+				}
+		}
+		
+		Fraction(int fz = 0, int fm = 1)
+		{
+			z = fz;
+			m = fm;
+			yuefen();
+			/*{
+				int n;
+				n = fz>fm?fm:fz;
+				for (int i = n; i>0; i--)
+				{
+					
+					if( ( fz % i ) || ( fm % i ) )
+					continue;
+					else
+					{
+						z = fz / i;
+						m = fm / i;
+						break;
+					}
+				}
+			}*/
+			if(fm <= 0)
+			{
+				cout << "分母不大于零，分数输入错误。\n";
+				z = 0;
+				m = 0; 
+			}
+			if(m != 0 && fz == 0)
+			{
+				z = 0;
+				m = 1;
+				
+			}
+		}
+	
+		void show()
+		{
+			cout<<z<<'/'<<m<<endl;
+		}
+		
+		Fraction operator+(const Fraction &a){
+			return Fraction(a.z*m+z*a.m, m*a.m);
+		}
+		Fraction operator-(const Fraction &a){
+			return Fraction(z*a.m-a.z*m, m*a.m);
+		}
+		Fraction operator*(const Fraction &a){
+			return Fraction(z*a.z, m*a.m);
+		}
+		Fraction operator/(const Fraction &a){
+			return Fraction(z*a.m, m*a.z);
+		}
+		
+		operator double()
+		{
+			return (double)z/m;
+		}
+		
+}; 
+
+
+
+
+
+int main()
+{
+	
+	Fraction a(1,3), b(5,6),c;
+	cout<<"输入的两个数为：\n";
+	a.show();
+	b.show() ;
+	cout<<"进行加减乘除及类型转换操作：\n";
+	c = a+b;
+	c.show();
+	c = a-b;
+	c.show();
+	c = a*b;
+	c.show();
+	c = a/b;
+	c.show();
+	
+	cout << (double)b<<endl;
+	
+	return 0;
+
+		
+
+ } 
